@@ -167,7 +167,7 @@ function ArticalPage() {
       <Modal
         title="编辑"
         width={"70vw"}
-        style={{ top: 30, }}
+        style={{ top: 30 }}
         open={open}
         destroyOnClose={true} //关闭窗口之后销毁
         maskClosable={false} //点击空白区域时不关闭

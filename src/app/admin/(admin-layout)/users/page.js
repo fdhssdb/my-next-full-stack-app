@@ -1,9 +1,18 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Input, Table, Button, Card } from "antd";
 import { SearchOutlined, PlusOutlined } from "@ant-design/icons";
 
 function UsersPage() {
+  const [list, setList] = useState([]);
+  const [query, setQuery] = useState({ per: 10, page: 1, name: "" });
+
+  useEffect(() => {
+    fetch(`/api/admin/users?page=${query.page}&per=${query.per}&name=${query.name}`)
+      .then((res) => res.json())
+      .then((res) => console.log(res));
+  }, [query]);
+
   return (
     <Card
       title="用户信息"
@@ -18,6 +27,8 @@ function UsersPage() {
         </Form.Item>
       </Form>
       <Table
+        pagination={() => {}}
+        dataSource={list}
         style={{ marginTop: "8px" }}
         columns={[
           {
@@ -25,12 +36,6 @@ function UsersPage() {
           },
           {
             title: "名字",
-          },
-          {
-            title: "昵称",
-          },
-          {
-            title: "用户名",
           },
           {
             title: "头像",
